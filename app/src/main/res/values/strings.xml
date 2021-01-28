@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ExchangeRatesK</string>
+    <string name="base_currency_heading">%s exchange rates</string>
+</resources>
