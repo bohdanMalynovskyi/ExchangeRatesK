@@ -1,4 +1,4 @@
-package com.example.exchangeratesk.retrofit
+package com.example.exchangeratesk.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ class RateAdapter(private val ratesList: Map<String, Double>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RateViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.exchange_rate_item, parent)
+            LayoutInflater.from(parent.context).inflate(R.layout.exchange_rate_item, parent, false)
         return RateViewHolder(itemView)
     }
 
@@ -20,7 +20,7 @@ class RateAdapter(private val ratesList: Map<String, Double>) :
     }
 
     override fun onBindViewHolder(holder: RateViewHolder, position: Int) {
-        val currencyNames: List<String>? = ratesList?.keys?.toList()
+        val currencyNames: List<String>? = ratesList.keys.toList()
         holder.tvRateCurName.text = currencyNames!![position]
         holder.tvRateCurValue.text = ratesList[currencyNames[position]].toString()
     }
