@@ -15,7 +15,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        tvBaseCurrency.text = getString(R.string.base_currency_heading, Constants.BASE_CURRENCY)
+
         loadDataFromWebService()
+
+//        ratesListRecyclerView.
     }
 
     private fun loadDataFromWebService() {
