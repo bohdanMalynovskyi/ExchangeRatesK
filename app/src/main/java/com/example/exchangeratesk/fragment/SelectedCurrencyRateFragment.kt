@@ -5,7 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.exchangeratesk.Constants
 import com.example.exchangeratesk.R
+import com.example.exchangeratesk.model.RatesByTimePeriod
+import com.example.exchangeratesk.retrofit.RetrofitService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,7 +21,7 @@ class SelectedCurrencyRateFragment : Fragment() {
     private val yesterdayDate: String = formatter.format(Date())
     private val weekAgoDate: String =
         formatter.format(Date(System.currentTimeMillis() - milSecInDay * 7))
-    lateinit var baseCurrency: String
+    lateinit var curName: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,11 +32,24 @@ class SelectedCurrencyRateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        baseCurrency =
+        curName = activity?.intent?.getStringExtra(Constants.CUR_NAME).toString()
     }
 
-    fun loadData() {
-//        RetrofitService.create()
-//            .getRatesByTimePeriod(yesterdayDate, weekAgoDate, Constants.BASE_CURRENCY, )
+    private fun loadDataFromWebService() {
+        RetrofitService.create()
+            .getRatesByTimePeriod(yesterdayDate, weekAgoDate, Constants.BASE_CURRENCY, curName)
+            .enqueue(object : Callback<RatesByTimePeriod> {
+                override fun onResponse(
+                    call: Call<RatesByTimePeriod>,
+                    response: Response<RatesByTimePeriod>
+                ) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onFailure(call: Call<RatesByTimePeriod>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
     }
+
 }
